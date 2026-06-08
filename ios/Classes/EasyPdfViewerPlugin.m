@@ -1,11 +1,11 @@
 #import "EasyPdfViewerPlugin.h"
-#if __has_include(<easy_pdf_viewer/easy_pdf_viewer-Swift.h>)
-#import <easy_pdf_viewer/easy_pdf_viewer-Swift.h>
+#if __has_include(<easy_pdf_viewer_plus/easy_pdf_viewer_plus-Swift.h>)
+#import <easy_pdf_viewer_plus/easy_pdf_viewer_plus-Swift.h>
 #else
 // Support project import fallback if the generated compatibility header
 // is not copied when this plugin is created as a library.
 // https://forums.swift.org/t/swift-static-libraries-dont-copy-generated-objective-c-header/19816
-#import "easy_pdf_viewer-Swift.h"
+#import "easy_pdf_viewer_plus-Swift.h"
 #endif
 
 static NSString* const kDirectory = @"EasyPdfViewer";

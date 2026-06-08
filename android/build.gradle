@@ -1,31 +1,36 @@
-group 'dev.kaichi.easy_pdf_viewer'
-version '1.0.7'
+group 'dev.kaichi.easy_pdf_viewer_plus'
+version '2.0.0'
 
 buildscript {
     repositories {
         google()
-        jcenter()
+        mavenCentral()
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:7.0.0'
+        classpath 'com.android.tools.build:gradle:8.7.3'
     }
 }
 
 rootProject.allprojects {
     repositories {
         google()
-        jcenter()
+        mavenCentral()
     }
 }
 
 apply plugin: 'com.android.library'
 
 android {
-    namespace "dev.kaichi.easy_pdf_viewer"
-    compileSdkVersion 34
+    namespace "dev.kaichi.easy_pdf_viewer_plus"
+    compileSdkVersion 36
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
 
     defaultConfig {
-        minSdkVersion 16
+        minSdkVersion 21
     }
 }

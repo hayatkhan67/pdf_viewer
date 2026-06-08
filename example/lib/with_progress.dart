@@ -1,4 +1,4 @@
-import 'package:easy_pdf_viewer/easy_pdf_viewer.dart';
+import 'package:easy_pdf_viewer_plus/easy_pdf_viewer_plus.dart';
 import 'package:flutter/material.dart';
 
 class WithProgress extends StatefulWidget {
