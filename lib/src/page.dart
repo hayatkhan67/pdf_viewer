@@ -1,5 +1,5 @@
 import 'dart:io';
-import 'package:easy_pdf_viewer/src/zoomable_widget.dart';
+import 'package:easy_pdf_viewer_plus/src/zoomable_widget.dart';
 import 'package:flutter/widgets.dart';
 
 /// A class to represent PDF page

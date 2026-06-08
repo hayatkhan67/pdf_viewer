@@ -1,14 +1,16 @@
-# easy_pdf_viewer
+# easy_pdf_viewer_plus
 
-A flutter plugin for handling PDF files. Works on both Android & iOS. Originally forked from (https://github.com/lohanidamodar/pdf_viewer).
+A Flutter plugin for handling PDF files. Works on both Android & iOS.
 
-[![Pub Package](https://img.shields.io/pub/v/easy_pdf_viewer.svg?style=flat-square)](https://pub.dartlang.org/packages/easy_pdf_viewer)
+This is an upgraded and actively maintained fork of [easy_pdf_viewer](https://pub.dev/packages/easy_pdf_viewer) (which has not been updated in over 2 years), maintained by [hayatkhan67](https://github.com/hayatkhan67).
+
+[![Pub Package](https://img.shields.io/pub/v/easy_pdf_viewer_plus.svg?style=flat-square)](https://pub.dev/packages/easy_pdf_viewer_plus)
 
 
 ## Installation
 
 ```
-> flutter pub add easy_pdf_viewer
+> flutter pub add easy_pdf_viewer_plus
 ```
 
 ---
@@ -22,7 +24,7 @@ No permissions required.
 ## How-to:
 
 #### Load PDF
-```
+```dart
 // Load from assets
 PDFDocument doc = await PDFDocument.fromAsset('assets/test.pdf');
  
@@ -35,14 +37,14 @@ PDFDocument doc = await PDFDocument.fromFile(file);
 ```
 
 #### Load pages
-```
+```dart
 // Load specific page
 PDFPage pageOne = await doc.get(page: _number);
 ```
 
 #### Pre-built viewer
 Use the pre-built PDF Viewer
-```
+```dart
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -65,7 +67,17 @@ This code produces the following view:
 
 | Name                                                                                             | Description                                                                                                                               |
 | ------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------- |
-| [path_provider](https://pub.dartlang.org/packages/path_provider)                                 | A Flutter plugin for finding commonly used locations on the filesystem. Supports iOS and Android.                                         |
-| [flutter_cache_manager](https://pub.dartlang.org/packages/flutter_cache_manager)                 | A CacheManager to download and cache files in the cache directory of the app. Various settings on how long to keep a file can be changed. |
-| [numberpicker](https://pub.dartlang.org/packages/numberpicker)                                   | NumberPicker is a custom widget designed for choosing an integer or decimal number by scrolling spinners.                                 |
-| [flutter_advanced_networkimage](https://pub.dartlang.org/packages/flutter_advanced_networkimage) | An advanced image provider provides caching and retrying for flutter app. Now with zoomable widget and transition to image widget.        |
+| [path_provider](https://pub.dev/packages/path_provider)                                          | A Flutter plugin for finding commonly used locations on the filesystem. Supports iOS and Android.                                         |
+| [flutter_cache_manager](https://pub.dev/packages/flutter_cache_manager)                          | A CacheManager to download and cache files in the cache directory of the app. Various settings on how long to keep a file can be changed. |
+| [numberpicker](https://pub.dev/packages/numberpicker)                                            | NumberPicker is a custom widget designed for choosing an integer or decimal number by scrolling spinners.                                 |
+
+## Credits & Fork Info
+
+This package is an upgraded fork and continuation of the original packages:
+* **[easy_pdf_viewer](https://pub.dev/packages/easy_pdf_viewer)** (developed/maintained by **Kaichi**, contact@kaichi.dev)
+* **[flutter_plugin_pdf_viewer](https://pub.dev/packages/flutter_plugin_pdf_viewer)** (originally created by **Tiago Ribeiro**, the foundation for all these PDF viewer plugins)
+
+### Maintainer
+
+This fork is actively maintained by **[Hayat Khan (hayatkhan67)](https://github.com/hayatkhan67)**. If you have any issues, feel free to open a pull request or issue on the GitHub repository.
+

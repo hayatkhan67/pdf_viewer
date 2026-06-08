@@ -354,9 +354,18 @@ class _ZoomableChildState extends AnimatedWidgetBaseState<_ZoomableChild> {
       origin: Offset(-(_panOffset!.evaluate(animation)?.dx ?? 0),
           -(_panOffset!.evaluate(animation)?.dy ?? 0)),
       transform: Matrix4.identity()
-        ..translate(_panOffset?.evaluate(animation)?.dx,
-            _panOffset?.evaluate(animation)?.dy ?? 0)
-        ..scale(_zoom!.evaluate(animation), _zoom!.evaluate(animation)),
+        ..translateByDouble(
+          _panOffset?.evaluate(animation)?.dx ?? 0.0,
+          _panOffset?.evaluate(animation)?.dy ?? 0.0,
+          0.0,
+          0.0,
+        )
+        ..scaleByDouble(
+          _zoom!.evaluate(animation) ?? 1.0,
+          _zoom!.evaluate(animation) ?? 1.0,
+          1.0,
+          1.0,
+        ),
       child: Transform.rotate(
         angle: _rotation!.evaluate(animation) ?? 0,
         child: widget.child,

@@ -1,17 +1,19 @@
-name: easy_pdf_viewer
-description: A flutter plugin for handling PDF files. Works on both Android & iOS
-version: 1.0.8
-homepage: https://github.com/kaichii/pdf_viewer
+name: easy_pdf_viewer_plus
+description: A flutter plugin for handling PDF files. Works on both Android & iOS. An upgraded and maintained fork of easy_pdf_viewer.
+version: 2.0.0
+homepage: https://github.com/hayatkhan67/pdf_viewer
+repository: https://github.com/hayatkhan67/pdf_viewer
 
 environment:
-  sdk: '>=3.3.1 <4.0.0'
+  sdk: '>=3.6.0 <4.0.0'
+  flutter: '>=3.27.0'
 
 dependencies:
   flutter:
     sdk: flutter
-  flutter_cache_manager: ^3.1.2
+  flutter_cache_manager: ^3.4.1
   numberpicker: ^2.1.2
-  path_provider: ^2.0.2
+  path_provider: ">=2.1.5 <3.0.0"
 
 dev_dependencies:
   flutter_test:
@@ -29,7 +31,7 @@ flutter:
   plugin:
     platforms:
       android:
-        package: dev.kaichi.easy_pdf_viewer
+        package: dev.kaichi.easy_pdf_viewer_plus
         pluginClass: EasyPdfViewerPlugin
       ios:
         pluginClass: EasyPdfViewerPlugin

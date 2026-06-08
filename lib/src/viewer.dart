@@ -1,5 +1,5 @@
-import 'package:easy_pdf_viewer/easy_pdf_viewer.dart';
-import 'package:easy_pdf_viewer/src/page_picker.dart';
+import 'package:easy_pdf_viewer_plus/easy_pdf_viewer_plus.dart';
+import 'package:easy_pdf_viewer_plus/src/page_picker.dart';
 import 'package:flutter/material.dart';
 
 /// enum to describe indicator position
@@ -224,8 +224,6 @@ class _PDFViewerState extends State<PDFViewer> {
         return Positioned(bottom: 20, left: 20, child: child);
       case IndicatorPosition.bottomRight:
         return Positioned(bottom: 20, right: 20, child: child);
-      default:
-        return Positioned(top: 20, right: 20, child: child);
     }
   }
 
