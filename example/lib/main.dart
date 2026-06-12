@@ -113,7 +113,8 @@ class _MyAppState extends State<MyApp> {
               ),
               currentAccountPicture: CircleAvatar(
                 backgroundColor: Colors.white,
-                child: Icon(Icons.picture_as_pdf, size: 40, color: Colors.deepPurple),
+                child: Icon(Icons.picture_as_pdf,
+                    size: 40, color: Colors.deepPurple),
               ),
               accountName: Text(
                 'PDF Viewer Plus',
@@ -122,7 +123,8 @@ class _MyAppState extends State<MyApp> {
               accountEmail: Text('v2.0.0'),
             ),
             ListTile(
-              leading: const Icon(Icons.picture_as_pdf, color: Colors.deepPurple),
+              leading:
+                  const Icon(Icons.picture_as_pdf, color: Colors.deepPurple),
               title: const Text('Load from Assets'),
               onTap: () {
                 Navigator.pop(context);
@@ -130,7 +132,8 @@ class _MyAppState extends State<MyApp> {
               },
             ),
             ListTile(
-              leading: const Icon(Icons.cloud_download, color: Colors.deepPurple),
+              leading:
+                  const Icon(Icons.cloud_download, color: Colors.deepPurple),
               title: const Text('Load from URL'),
               onTap: () {
                 Navigator.pop(context);
@@ -195,4 +198,3 @@ class _MyAppState extends State<MyApp> {
     );
   }
 }
-

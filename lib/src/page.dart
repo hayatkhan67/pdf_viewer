@@ -50,7 +50,14 @@ class _PDFPageState extends State<PDFPage> {
   }
 
   void _repaint() {
-    provider = FileImage(File(widget.imgPath!));
+    final file = File(widget.imgPath!);
+    debugPrint("PDFPage imgPath: ${file.path}");
+    if (file.existsSync()) {
+      debugPrint("PDFPage image size: ${file.lengthSync()} bytes");
+    } else {
+      debugPrint("PDFPage image DOES NOT exist!");
+    }
+    provider = FileImage(file);
     final resolver = provider.resolve(createLocalImageConfiguration(context));
     resolver.addListener(ImageStreamListener((imgInfo, alreadyPainted) {
       if (mounted && !alreadyPainted) setState(() {});
