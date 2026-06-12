@@ -1,3 +1,7 @@
+## 2.0.1
+
+- Fix PDF showing blank issue
+
 ## 2.0.0
 
 - **BREAKING**: Renamed package from `easy_pdf_viewer` to `easy_pdf_viewer_plus`

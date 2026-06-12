@@ -1,6 +1,6 @@
 name: easy_pdf_viewer_plus
 description: A flutter plugin for handling PDF files. Works on both Android & iOS. An upgraded and maintained fork of easy_pdf_viewer.
-version: 2.0.0
+version: 2.0.1
 homepage: https://github.com/hayatkhan67/pdf_viewer
 repository: https://github.com/hayatkhan67/pdf_viewer
 
