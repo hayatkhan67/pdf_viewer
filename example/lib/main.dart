@@ -1,8 +1,10 @@
+import 'dart:io';
 import 'package:easy_pdf_viewer_plus_example/with_progress.dart';
 import 'package:flutter/material.dart';
 import 'package:easy_pdf_viewer_plus/easy_pdf_viewer_plus.dart';
+import 'package:file_picker/file_picker.dart';
 
-void main() => runApp(App());
+void main() => runApp(const App());
 
 class App extends StatelessWidget {
   const App({Key? key}) : super(key: key);
@@ -10,13 +12,18 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: MyApp(),
+      title: 'Easy PDF Viewer Plus',
+      theme: ThemeData(
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        useMaterial3: true,
+      ),
+      home: const MyApp(),
     );
   }
 }
 
 class MyApp extends StatefulWidget {
-  const MyApp({this.progressExample = false});
+  const MyApp({Key? key, this.progressExample = false}) : super(key: key);
 
   final bool progressExample;
 
@@ -36,30 +43,58 @@ class _MyAppState extends State<MyApp> {
 
   loadDocument() async {
     document = await PDFDocument.fromAsset('assets/sample.pdf');
-
-    setState(() => _isLoading = false);
+    if (mounted) {
+      setState(() => _isLoading = false);
+    }
   }
 
-  changePDF(value) async {
+  changePDF(int value) async {
     setState(() => _isLoading = true);
-    if (value == 1) {
-      document = await PDFDocument.fromAsset('assets/sample2.pdf');
-    } else if (value == 2) {
-      document = await PDFDocument.fromURL(
-        "https://www.africau.edu/images/default/sample.pdf",
-
-        /* cacheManager: CacheManager(
-          Config(
-            "customCacheKey",
-            stalePeriod: const Duration(days: 2),
-            maxNrOfCacheObjects: 10,
-          ),
-        ), */
-      );
-    } else {
-      document = await PDFDocument.fromAsset('assets/sample.pdf');
+    try {
+      if (value == 1) {
+        document = await PDFDocument.fromAsset('assets/sample2.pdf');
+      } else if (value == 2) {
+        document = await PDFDocument.fromURL(
+          "https://www.africau.edu/images/default/sample.pdf",
+        );
+      } else {
+        document = await PDFDocument.fromAsset('assets/sample.pdf');
+      }
+    } catch (e) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Error loading PDF: $e')),
+        );
+      }
+    } finally {
+      if (mounted) {
+        setState(() => _isLoading = false);
+      }
     }
-    setState(() => _isLoading = false);
+  }
+
+  _pickPDF() async {
+    try {
+      FilePickerResult? result = await FilePicker.pickFiles(
+        type: FileType.custom,
+        allowedExtensions: ['pdf'],
+      );
+
+      if (result != null && result.files.single.path != null) {
+        setState(() => _isLoading = true);
+        document = await PDFDocument.fromFile(File(result.files.single.path!));
+      }
+    } catch (e) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Error picking or loading PDF: $e')),
+        );
+      }
+    } finally {
+      if (mounted) {
+        setState(() => _isLoading = false);
+      }
+    }
   }
 
   @override
@@ -68,28 +103,62 @@ class _MyAppState extends State<MyApp> {
       drawer: Drawer(
         child: Column(
           children: <Widget>[
-            SizedBox(height: 36),
+            const UserAccountsDrawerHeader(
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  colors: [Colors.deepPurple, Colors.indigo],
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                ),
+              ),
+              currentAccountPicture: CircleAvatar(
+                backgroundColor: Colors.white,
+                child: Icon(Icons.picture_as_pdf, size: 40, color: Colors.deepPurple),
+              ),
+              accountName: Text(
+                'PDF Viewer Plus',
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+              ),
+              accountEmail: Text('v2.0.0'),
+            ),
             ListTile(
-              title: Text('Load from Assets'),
+              leading: const Icon(Icons.picture_as_pdf, color: Colors.deepPurple),
+              title: const Text('Load from Assets'),
               onTap: () {
+                Navigator.pop(context);
                 changePDF(1);
               },
             ),
             ListTile(
-              title: Text('Load from URL'),
+              leading: const Icon(Icons.cloud_download, color: Colors.deepPurple),
+              title: const Text('Load from URL'),
               onTap: () {
+                Navigator.pop(context);
                 changePDF(2);
               },
             ),
             ListTile(
-              title: Text('Restore default'),
+              leading: const Icon(Icons.folder_open, color: Colors.deepPurple),
+              title: const Text('Pick and Load PDF'),
               onTap: () {
-                changePDF(3);
+                Navigator.pop(context);
+                _pickPDF();
               },
             ),
             ListTile(
-              title: Text('With Progress'),
+              leading: const Icon(Icons.restore, color: Colors.deepPurple),
+              title: const Text('Restore default'),
               onTap: () {
+                Navigator.pop(context);
+                changePDF(3);
+              },
+            ),
+            const Divider(),
+            ListTile(
+              leading: const Icon(Icons.trending_up, color: Colors.deepPurple),
+              title: const Text('With Progress Example'),
+              onTap: () {
+                Navigator.pop(context);
                 Navigator.push(
                   context,
                   MaterialPageRoute(
@@ -102,11 +171,12 @@ class _MyAppState extends State<MyApp> {
         ),
       ),
       appBar: AppBar(
-        title: const Text('PDFViewer'),
+        title: const Text('PDFViewer Plus'),
+        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
       ),
       body: Center(
         child: _isLoading
-            ? Center(child: CircularProgressIndicator())
+            ? const Center(child: CircularProgressIndicator())
             : PDFViewer(
                 document: document,
                 lazyLoad: false,
@@ -114,46 +184,15 @@ class _MyAppState extends State<MyApp> {
                 numberPickerConfirmWidget: const Text(
                   "Confirm",
                 ),
-                //uncomment below line to preload all pages
-                // lazyLoad: false,
-                // uncomment below line to scroll vertically
-                // scrollDirection: Axis.vertical,
-
-                //uncomment below code to replace bottom navigation with your own
-                /* navigationBuilder:
-                      (context, page, totalPages, jumpToPage, animateToPage) {
-                    return ButtonBar(
-                      alignment: MainAxisAlignment.spaceEvenly,
-                      children: <Widget>[
-                        IconButton(
-                          icon: Icon(Icons.first_page),
-                          onPressed: () {
-                            jumpToPage()(page: 0);
-                          },
-                        ),
-                        IconButton(
-                          icon: Icon(Icons.arrow_back),
-                          onPressed: () {
-                            animateToPage(page: page - 2);
-                          },
-                        ),
-                        IconButton(
-                          icon: Icon(Icons.arrow_forward),
-                          onPressed: () {
-                            animateToPage(page: page);
-                          },
-                        ),
-                        IconButton(
-                          icon: Icon(Icons.last_page),
-                          onPressed: () {
-                            jumpToPage(page: totalPages - 1);
-                          },
-                        ),
-                      ],
-                    );
-                  }, */
               ),
+      ),
+      floatingActionButton: FloatingActionButton.extended(
+        onPressed: _pickPDF,
+        label: const Text('Pick PDF'),
+        icon: const Icon(Icons.folder_open),
+        tooltip: 'Pick PDF from Device',
       ),
     );
   }
 }
+
