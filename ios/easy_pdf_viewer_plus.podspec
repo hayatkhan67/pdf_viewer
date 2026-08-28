@@ -13,7 +13,8 @@ Pod::Spec.new do |s|
   s.license          = { :file => '../LICENSE' }
   s.author           = { 'Hayat Khan' => 'hayatkhan67@github.com', 'Kaichi' => 'contact@kaichi.dev' }
   s.source           = { :path => '.' }
-  s.source_files = 'Classes/**/*'
+  s.source_files = 'easy_pdf_viewer_plus/Sources/easy_pdf_viewer_plus/**/*.{h,m}'
+  s.public_header_files = 'easy_pdf_viewer_plus/Sources/easy_pdf_viewer_plus/include/**/*.h'
   s.dependency 'Flutter'
   s.platform = :ios, '13.0'
 
